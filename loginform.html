@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopee - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e7f8fe;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .login-container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p id="error-message" class="error"></p>
+    </div>
+    
+    <script>
+        let attempts = 0;
+        function login() {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+            
+            if (user === "admin123" && pass === "admin123") {
+                window.location.href = "file:///C:/RICHTER,%20Raniel%20P/Website/hompage2.html";
+            } else {
+                attempts++;
+                if (attempts >= 2) {
+                    errorMessage.innerText = "Too many failed attempts. Please wait 10 seconds.";
+                    document.querySelector("button").disabled = true;
+                    setTimeout(() => {
+                        document.querySelector("button").disabled = false;
+                        errorMessage.innerText = "";
+                        attempts = 0;
+                    }, 10000);
+                } else {
+                    errorMessage.innerText = "Invalid username or password. Try again.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
